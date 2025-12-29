@@ -5,21 +5,59 @@
 
 {% block meta_description %}Your exclusive lifestyle connections dashboard - browse sophisticated portfolios.{% endblock %}
 
+{% block extra_head %}
+<!-- Font Awesome for professional icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
 {% block content %}
 <div class="member-dashboard">
-    <!-- Top Navigation Bar -->
+    <!-- Top Navigation Bar WITH FONT AWESOME ICONS -->
     <div class="member-nav">
         <div class="nav-left">
             <h1>ELITE LIFESTYLE CONNECTIONS</h1>
         </div>
         <div class="nav-right">
-            <a href="#" class="nav-btn approve-btn">CURATE PORTFOLIO</a>
-            <a href="{% url 'curated_search' %}" class="nav-btn">SEARCH</a>
-            <a href="{% url 'curated_introductions' %}" class="nav-btn">DISCREET EXCHANGES</a>
-            <a href="{% url 'saved_connections' %}" class="nav-btn">SAVED CONNECTIONS</a>
-            <a href="#" class="nav-btn">EXCLUSIVE EXPERIENCES</a>
-            <a href="#" class="nav-btn">HOST EXPERIENCE</a>
-            <a href="{% url 'engagement_management' %}" class="nav-btn upgrade-btn">UPGRADE</a>
+            <!-- Font Awesome Icon Navigation -->
+            <a href="#" class="nav-icon" title="Curate Portfolio">
+                <i class="fas fa-user-edit"></i>
+                <span class="tooltip">Curate</span>
+            </a>
+            
+            <a href="{% url 'curated_search' %}" class="nav-icon" title="Search">
+                <i class="fas fa-search"></i>
+                <span class="tooltip">Search</span>
+            </a>
+            
+            <a href="{% url 'curated_introductions' %}" class="nav-icon" title="Discreet Exchanges">
+                <i class="fas fa-envelope"></i>
+                <span class="tooltip">Exchanges</span>
+            </a>
+            
+            <a href="{% url 'saved_connections' %}" class="nav-icon" title="Saved Connections">
+                <i class="fas fa-bookmark"></i>
+                <span class="tooltip">Saved</span>
+            </a>
+            
+            <a href="#" class="nav-icon" title="Exclusive Experiences">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="tooltip">Experiences</span>
+            </a>
+            
+            <a href="#" class="nav-icon" title="Host Experience">
+                <i class="fas fa-plus"></i>
+                <span class="tooltip">Host</span>
+            </a>
+            
+            <a href="{% url 'engagement_management' %}" class="nav-icon upgrade-btn" title="Upgrade Membership">
+                <i class="fas fa-arrow-up"></i>
+                <span class="tooltip">Upgrade</span>
+            </a>
+            
+            <a href="{% url 'edit_portfolio' %}" class="nav-icon profile-btn" title="Your Portfolio">
+                <i class="fas fa-user-circle"></i>
+                <span class="tooltip">Portfolio</span>
+            </a>
         </div>
     </div>
 
@@ -56,8 +94,12 @@
                 </div>
                 
                 <div class="filter-group">
-                    <button type="submit" class="search-now-btn">SEARCH NOW</button>
-                    <a href="{% url 'curated_search' %}" class="view-all-btn">VIEW ALL PORTFOLIOS</a>
+                    <button type="submit" class="search-now-btn">
+                        <i class="fas fa-search"></i> SEARCH NOW
+                    </button>
+                    <a href="{% url 'curated_search' %}" class="view-all-btn">
+                        <i class="fas fa-list"></i> VIEW ALL PORTFOLIOS
+                    </a>
                 </div>
             </div>
         </form>
@@ -90,9 +132,15 @@
                     
                     <!-- Quick Actions -->
                     <div class="member-actions">
-                        <a href="#" class="action-btn message-btn">MESSAGE</a>
-                        <button class="action-btn favorite-btn" data-user-id="{{ portfolio.user.id }}">FAVORITE</button>
-                        <a href="{% url 'view_portfolio' portfolio.user.username %}" class="action-btn view-btn">VIEW PORTFOLIO</a>
+                        <a href="#" class="action-btn message-btn">
+                            <i class="fas fa-envelope"></i> MESSAGE
+                        </a>
+                        <button class="action-btn favorite-btn" data-user-id="{{ portfolio.user.id }}">
+                            <i class="fas fa-heart"></i> FAVORITE
+                        </button>
+                        <a href="{% url 'view_portfolio' portfolio.user.username %}" class="action-btn view-btn">
+                            <i class="fas fa-eye"></i> VIEW PORTFOLIO
+                        </a>
                     </div>
                     
                     <!-- Engagement Info -->
@@ -102,11 +150,14 @@
                     </div>
                     
                     <!-- Block Button -->
-                    <button class="block-btn">RESTRICT CONNECTION</button>
+                    <button class="block-btn">
+                        <i class="fas fa-ban"></i> RESTRICT CONNECTION
+                    </button>
                 </div>
             </div>
             {% empty %}
             <div class="no-members">
+                <i class="fas fa-users fa-3x"></i>
                 <h3>No portfolios available at the moment</h3>
                 <p>Check back soon or refine your search criteria.</p>
             </div>
@@ -118,7 +169,9 @@
     {% if portfolios.has_other_pages %}
     <div class="pagination">
         {% if portfolios.has_previous %}
-        <a href="?page={{ portfolios.previous_page_number }}" class="page-link">← Previous</a>
+        <a href="?page={{ portfolios.previous_page_number }}" class="page-link">
+            <i class="fas fa-chevron-left"></i> Previous
+        </a>
         {% endif %}
         
         <span class="page-info">
@@ -126,7 +179,9 @@
         </span>
         
         {% if portfolios.has_next %}
-        <a href="?page={{ portfolios.next_page_number }}" class="page-link">Next →</a>
+        <a href="?page={{ portfolios.next_page_number }}" class="page-link">
+            Next <i class="fas fa-chevron-right"></i>
+        </a>
         {% endif %}
     </div>
     {% endif %}
@@ -163,42 +218,82 @@
         margin: 0;
     }
     
+    /* Icon Navigation Styles */
     .nav-right {
         display: flex;
-        gap: 15px;
         align-items: center;
+        gap: 10px;
     }
     
-    .nav-btn {
-        padding: 10px 20px;
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
+    .nav-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        color: #d4af37;
         text-decoration: none;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        letter-spacing: 1px;
         transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        font-size: 1.2rem;
+    }
+    
+    .nav-icon:hover {
+        background: rgba(212, 175, 55, 0.1);
+        border-color: #d4af37;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .nav-icon .tooltip {
+        position: absolute;
+        bottom: -25px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.5px;
         text-transform: uppercase;
     }
     
-    .nav-btn:hover {
-        background: rgba(212, 175, 55, 0.3);
-        border-color: #d4af37;
-        transform: translateY(-2px);
+    .nav-icon:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+        bottom: -30px;
     }
     
-    .approve-btn {
+    /* Special buttons */
+    .upgrade-btn {
         background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
         color: #000;
-        font-weight: 700;
+        border: none;
+        font-weight: bold;
     }
     
-    .upgrade-btn {
-        background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
-        color: #000;
-        font-weight: 700;
+    .upgrade-btn:hover {
+        background: linear-gradient(135deg, #e6c158 0%, #d4af37 100%);
+    }
+    
+    .profile-btn {
+        background: rgba(46, 204, 113, 0.1);
+        color: #2ecc71;
+        border-color: rgba(46, 204, 113, 0.3);
+    }
+    
+    .profile-btn:hover {
+        background: rgba(46, 204, 113, 0.2);
     }
     
     /* Search Filters */
@@ -276,8 +371,10 @@
         border-radius: 6px;
         font-weight: 700;
         text-decoration: none;
-        display: inline-block;
-        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
         transition: all 0.3s ease;
         border: none;
         cursor: pointer;
@@ -406,6 +503,10 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         min-width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
     }
     
     .message-btn {
@@ -471,6 +572,10 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
     }
     
     .block-btn:hover {
@@ -485,6 +590,11 @@
         background: rgba(30, 30, 30, 0.6);
         border-radius: 15px;
         border: 2px dashed rgba(212, 175, 55, 0.3);
+    }
+    
+    .no-members i {
+        color: #d4af37;
+        margin-bottom: 20px;
     }
     
     .no-members h3 {
@@ -520,6 +630,9 @@
         border-radius: 6px;
         font-weight: 600;
         transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
     
     .page-link:hover {
@@ -571,6 +684,21 @@
         .member-actions {
             flex-direction: column;
         }
+        
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 3px;
+            font-size: 1rem;
+        }
+        
+        .nav-icon .tooltip {
+            display: none;
+        }
+        
+        .nav-left h1 {
+            font-size: 1.2rem;
+        }
     }
 </style>
 {% endblock %}
@@ -581,17 +709,17 @@
     document.querySelectorAll('.favorite-btn').forEach(button => {
         button.addEventListener('click', function() {
             const userId = this.dataset.userId;
-            const originalText = this.textContent;
+            const originalHTML = this.innerHTML;
             
             // Simulate AJAX call
-            this.textContent = 'FAVORITED ✓';
+            this.innerHTML = '<i class="fas fa-check"></i> FAVORITED';
             this.style.background = 'rgba(46, 204, 113, 0.3)';
             this.style.color = '#2ecc71';
             this.style.borderColor = '#27ae60';
             
             // Reset after 2 seconds
             setTimeout(() => {
-                this.textContent = originalText;
+                this.innerHTML = originalHTML;
                 this.style.background = '';
                 this.style.color = '';
                 this.style.borderColor = '';
@@ -603,7 +731,7 @@
     document.querySelectorAll('.block-btn').forEach(button => {
         button.addEventListener('click', function() {
             if (confirm('Restrict connection with this individual?')) {
-                this.textContent = 'CONNECTION RESTRICTED';
+                this.innerHTML = '<i class="fas fa-check"></i> CONNECTION RESTRICTED';
                 this.style.background = 'rgba(231, 76, 60, 0.3)';
                 this.style.color = '#e74c3c';
                 this.disabled = true;
