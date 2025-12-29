@@ -1,0 +1,623 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block seo_title %}Premium Lifestyle Introductions | Adult Arrangements{% endblock %}
+
+{% block seo_description %}Join our exclusive coterie of accomplished individuals seeking meaningful connections and shared appreciation for life's finer moments. Curated introductions for those with discerning tastes.{% endblock %}
+
+{% block seo_keywords %}elite dating, luxury companionship, sophisticated connections, premium introductions, exclusive community{% endblock %}
+
+{% block og_title %}Premium Lifestyle Introductions | Adult Arrangements{% endblock %}
+
+{% block og_description %}An exclusive community for accomplished individuals seeking meaningful connections and shared appreciation for life's finer moments.{% endblock %}
+
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Adult Arrangements",
+  "url": "https://adultarrangements.com",
+  "description": "An exclusive community for accomplished individuals seeking meaningful connections and shared appreciation for life's finer moments.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Adult Arrangements",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://adultarrangements.com/static/images/logo.png"
+    }
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://adultarrangements.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{% endblock %}
+
+{% block extra_meta %}
+<meta name="author" content="Adult Arrangements">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="googlebot" content="index, follow">
+<meta property="og:site_name" content="Adult Arrangements">
+<meta property="og:locale" content="en_US">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>
+            <span class="subtitle">ESTABLISHED 2025 • EXCLUSIVE</span>
+            ELEVATING THE ART OF<br>
+            <span class="gold-text">COMPANIONSHIP</span>
+        </h1>
+
+        <div class="interactive-form-container">
+            <div class="interactive-form">
+                <span class="form-text">I am a</span>
+                <div class="input-group">
+                    <select>
+                        <option>Gentleman</option>
+                        <option>Lady</option>
+                    </select>
+                </div>
+                <span class="form-text">in search of</span>
+                <div class="input-group">
+                    <select>
+                        <option>Harmonious Compatibility</option>
+                        <option>Sophisticated Dating</option>
+                        <option>Meaningful Connection</option>
+                        <option>Cultured Companionship</option>
+                    </select>
+                </div>
+                <span class="form-text">with a</span>
+                <div class="input-group">
+                    <select>
+                        <option>Woman</option>
+                        <option>Man</option>
+                        <option>Couple</option>
+                    </select>
+                </div>
+                <span class="form-text">.</span>
+            </div>
+        </div>
+
+        <div class="cta-container">
+            <a href="/join" class="cta-button">Request Introduction</a>
+        </div>
+        
+        <p class="hero-subtext">
+            Join our exclusive coterie of accomplished individuals seeking 
+            meaningful connections and shared appreciation for life's finer moments.
+        </p>
+    </div>
+</section>
+
+<section class="dashboard">
+    <div class="grid-header">
+        <div>
+            <h2>Curated Introductions</h2>
+            <p style="color: #666">Live updates • 32 members currently active</p>
+        </div>
+        <div style="font-size: 2rem; color: #333;" class="desktop-only">← →</div>
+    </div>
+
+    <div class="bento-grid">
+        
+        <!-- Left Profile Card - Jasmine -->
+        <div class="card card-profile jasmine">
+            <div class="tag active">● Active</div>
+            <div class="card-info">
+                <h3>Jasmine, 24</h3>
+                <p>Colorado • Model</p>
+            </div>
+        </div>
+
+        <!-- Experience Card with "Hot Dates" title -->
+        <div class="card card-experience">
+            <div class="experience-header">
+                <h3 class="hot-dates-title">Hot Dates</h3>
+                <div class="tag">December 7th • Sydney</div>
+            </div>
+            <div class="card-info">
+                <h3>Private Dinner & Opera Evening</h3>
+                <p>Seeking an elegant companion for a black-tie cultural experience.</p>
+                <span class="experience-badge">Cultural Experience</span>
+            </div>
+        </div>
+
+        <!-- Right Profile Card -->
+        <div class="card card-profile new-arrival">
+            <div class="tag">New Member</div>
+            <div class="card-info">
+                <h3>Alexandra, 22</h3>
+                <p>Indiana • Art History Student</p>
+            </div>
+        </div>
+
+        <!-- Safety Card -->
+        <div class="card card-safety">
+            <div class="safety-icon">🔒</div>
+            <div class="card-info">
+                <h3>Verified & Secure</h3>
+                <p>Military-grade encryption & identity verification</p>
+                <div class="safety-features">
+                    <span class="safety-feature">Identity Verified</span>
+                    <span class="safety-feature">Encrypted</span>
+                    <span class="safety-feature">Discreet</span>
+                    <span class="safety-feature">24/7 Support</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Card -->
+        <div class="card card-stats">
+            <div>
+                <h3 class="gold-text">100%</h3>
+                <p>Verified Members</p>
+                <br>
+                <h3 class="gold-text">Exclusive</h3>
+                <p>By Introduction Only</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* --- HERO SECTION STYLES - FIXED CENTERING --- */
+    .hero {
+        min-height: calc(100vh - 120px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        padding: 2rem 1rem;
+    }
+
+    /* Ambient Glow */
+    .hero::before {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(191, 149, 63, 0.08) 0%, transparent 70%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .hero-content {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-family: 'Cinzel', serif;
+        font-size: clamp(3rem, 6vw, 5rem);
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        letter-spacing: -0.02em;
+        text-align: center;
+    }
+
+    .subtitle {
+        display: block;
+        font-size: 0.4em;
+        font-family: 'Space Grotesk', sans-serif;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+
+    /* --- INTERACTIVE FORM - FIXED CENTERING --- */
+    .interactive-form-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 3rem 0;
+    }
+
+    .interactive-form {
+        background: var(--glass-bg);
+        backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        padding: 2rem 3rem;
+        border-radius: 20px;
+        font-size: 1.2rem;
+        color: #ddd;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        max-width: 900px;
+        text-align: center;
+    }
+
+    .form-text {
+        white-space: nowrap;
+    }
+
+    .input-group {
+        display: inline-block;
+        position: relative;
+        min-width: 160px;
+    }
+
+    .input-group select {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #555;
+        color: #fff;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.2rem;
+        padding: 0.2rem 1.5rem 0.2rem 0.5rem;
+        appearance: none;
+        cursor: pointer;
+        outline: none;
+        width: 100%;
+        text-align: center;
+        transition: border-color 0.3s;
+    }
+
+    .input-group select:focus {
+        border-bottom-color: #bf953f;
+    }
+
+    .input-group::after {
+        content: '▼';
+        font-size: 0.6rem;
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #bf953f;
+    }
+
+    /* --- CTA BUTTON - FIXED CENTERING --- */
+    .cta-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    .cta-button {
+        display: inline-block;
+        padding: 1rem 3rem;
+        background: var(--gold-gradient);
+        color: #000;
+        font-weight: 600;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: 0.3s;
+        box-shadow: var(--accent-glow);
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        min-width: 250px;
+    }
+
+    .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(191, 149, 63, 0.6);
+    }
+
+    .hero-subtext {
+        margin-top: 2rem;
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        max-width: 600px;
+        line-height: 1.6;
+    }
+
+    /* --- BENTO GRID SECTION - FIXED IMAGE SHIFT --- */
+    .dashboard {
+        padding: 4rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .grid-header {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+    }
+    
+    .grid-header h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 2rem;
+    }
+
+    .bento-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: repeat(2, 300px);
+        gap: 1.5rem;
+    }
+
+    .card {
+        background: var(--glass-bg);
+        border: var(--glass-border);
+        border-radius: 24px;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card:hover {
+        background: rgba(255,255,255,0.06);
+        border-color: rgba(255,255,255,0.2);
+        /* FIXED: Prevent background image from shifting */
+        transform: translateY(-5px);
+    }
+
+    /* Profile Cards - FIXED BACKGROUND IMAGE SHIFT */
+    .card-profile {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        /* FIX: Add fixed background attachment */
+        background-attachment: scroll !important;
+    }
+
+    .card-profile.jasmine {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        background-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%), 
+                          url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop') !important;
+        /* FIX: Explicitly set background properties */
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .card-profile.new-arrival {
+        grid-column: 3;
+        grid-row: 1;
+        background-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%), 
+                          url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop') !important;
+        /* FIX: Explicitly set background properties */
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    /* --- UPDATED: Experience Card with "Hot Dates" title --- */
+    .card-experience {
+        grid-column: 2;
+        grid-row: 1;
+        background-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%), 
+                          url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1000&auto=format&fit=crop');
+        background-size: cover;
+        background-position: right center;
+        background-repeat: no-repeat;
+        /* FIXED: Ensure background stays on hover */
+        background-attachment: scroll !important;
+    }
+
+    /* Hot Dates Title Styling */
+    .experience-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+    }
+
+    .hot-dates-title {
+        font-family: 'Cinzel', serif;
+        font-size: 1.5rem;
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 600;
+        margin: 0;
+        padding: 0.3rem 0.8rem;
+        border-radius: 8px;
+        background-color: rgba(0,0,0,0.5);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(191, 149, 63, 0.3);
+    }
+
+    .experience-badge {
+        margin-top: 1rem;
+        display: inline-block;
+        font-family: 'Space Grotesk', sans-serif;
+        color: #bf953f;
+        border: 1px solid #bf953f;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    /* Stats Card */
+    .card-stats {
+        grid-column: 3;
+        grid-row: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Safety Card */
+    .card-safety {
+        grid-column: 2;
+        grid-row: 2;
+        background: linear-gradient(135deg, rgba(10, 50, 80, 0.2) 0%, rgba(10, 30, 50, 0.4) 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .safety-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .safety-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .safety-feature {
+        background: rgba(0, 60, 100, 0.3);
+        border: 1px solid rgba(100, 180, 255, 0.2);
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* Card Content */
+    .tag {
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(4px);
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        border: 1px solid rgba(255,255,255,0.1);
+        align-self: flex-start;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .tag.active {
+        border-color: #0f0;
+        color: #afa;
+    }
+
+    .card-info h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-info p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+        .hero {
+            min-height: calc(100vh - 80px);
+            padding: 1rem;
+        }
+        
+        .dashboard { 
+            padding: 2rem 1rem; 
+        }
+
+        h1 { 
+            font-size: clamp(2.5rem, 8vw, 3rem); 
+            margin-bottom: 1.5rem;
+        }
+
+        /* FIXED: Interactive form on mobile */
+        .interactive-form { 
+            padding: 1.5rem 1rem;
+            font-size: 1rem;
+            margin: 2rem 0;
+            flex-direction: column;
+            gap: 0.75rem;
+            width: 95%;
+        }
+        
+        .form-text {
+            display: block;
+            margin: 0.25rem 0;
+        }
+        
+        .input-group {
+            width: 100%;
+            max-width: 250px;
+            margin: 0.5rem 0;
+        }
+        
+        .input-group select {
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+            width: 100%;
+        }
+        
+        .cta-button {
+            width: 90%;
+            max-width: 300px;
+        }
+
+        .hero-subtext {
+            font-size: 1rem;
+            padding: 0 1rem;
+        }
+
+        .bento-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+        }
+        
+        .card-profile.jasmine,
+        .card-profile.new-arrival,
+        .card-experience,
+        .card-stats,
+        .card-safety {
+            grid-column: 1;
+            grid-row: auto;
+            height: 300px;
+        }
+        
+        .card-profile.jasmine,
+        .card-profile.new-arrival {
+            height: 400px;
+        }
+        
+        /* Mobile adjustments for Hot Dates title */
+        .experience-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .hot-dates-title {
+            font-size: 1.3rem;
+        }
+        
+        .desktop-only {
+            display: none;
+        }
+        
+        .grid-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+    }
+</style>
+{% endblock %}

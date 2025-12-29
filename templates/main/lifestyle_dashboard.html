@@ -1,0 +1,614 @@
+<!-- templates/main/lifestyle_dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}Lifestyle Portfolio Dashboard | Elite Lifestyle Connections{% endblock %}
+
+{% block meta_description %}Your exclusive lifestyle connections dashboard - browse sophisticated portfolios.{% endblock %}
+
+{% block content %}
+<div class="member-dashboard">
+    <!-- Top Navigation Bar -->
+    <div class="member-nav">
+        <div class="nav-left">
+            <h1>ELITE LIFESTYLE CONNECTIONS</h1>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="nav-btn approve-btn">CURATE PORTFOLIO</a>
+            <a href="{% url 'curated_search' %}" class="nav-btn">SEARCH</a>
+            <a href="{% url 'curated_introductions' %}" class="nav-btn">DISCREET EXCHANGES</a>
+            <a href="{% url 'saved_connections' %}" class="nav-btn">SAVED CONNECTIONS</a>
+            <a href="#" class="nav-btn">EXCLUSIVE EXPERIENCES</a>
+            <a href="#" class="nav-btn">HOST EXPERIENCE</a>
+            <a href="{% url 'engagement_management' %}" class="nav-btn upgrade-btn">UPGRADE</a>
+        </div>
+    </div>
+
+    <!-- Search Filters -->
+    <div class="search-filters">
+        <div class="filters-header">
+            <h2>DISCOVER SOPHISTICATED CONNECTIONS</h2>
+        </div>
+        
+        <form method="GET" action="{% url 'curated_search' %}" class="filter-form">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Portfolio Status</label>
+                    <select name="status" class="filter-select">
+                        <option value="">All Portfolios</option>
+                        <option value="approved">Curator Approved</option>
+                        <option value="premium">Premium Tier</option>
+                        <option value="exclusive">Exclusive Tier</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Age Range</label>
+                    <div class="age-range">
+                        <input type="number" name="age_min" placeholder="Min" min="18" max="100" class="age-input">
+                        <span>to</span>
+                        <input type="number" name="age_max" placeholder="Max" min="18" max="100" class="age-input">
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Location</label>
+                    <input type="text" name="location" placeholder="City, State, or Region" class="location-input">
+                </div>
+                
+                <div class="filter-group">
+                    <button type="submit" class="search-now-btn">SEARCH NOW</button>
+                    <a href="{% url 'curated_search' %}" class="view-all-btn">VIEW ALL PORTFOLIOS</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Members Grid -->
+    <div class="members-grid-container">
+        <div class="members-grid">
+            {% for portfolio in portfolios %}
+            <div class="member-card">
+                <!-- Member Image/Initial -->
+                <div class="member-image">
+                    {% if portfolio.portfolio_image %}
+                    <img src="{{ portfolio.portfolio_image.url }}" alt="{{ portfolio.preferred_name }}">
+                    {% else %}
+                    <div class="member-initial">
+                        {{ portfolio.preferred_name|first|upper|default:"?" }}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Online Indicator -->
+                    {% if portfolio.last_active %}
+                    <div class="online-indicator {% if portfolio.last_active|timesince|slice:':1' <= '5' %}online{% endif %}"></div>
+                    {% endif %}
+                </div>
+                
+                <!-- Member Info -->
+                <div class="member-info">
+                    <h3 class="member-username">{{ portfolio.user.username|upper }}</h3>
+                    
+                    <!-- Quick Actions -->
+                    <div class="member-actions">
+                        <a href="#" class="action-btn message-btn">MESSAGE</a>
+                        <button class="action-btn favorite-btn" data-user-id="{{ portfolio.user.id }}">FAVORITE</button>
+                        <a href="{% url 'view_portfolio' portfolio.user.username %}" class="action-btn view-btn">VIEW PORTFOLIO</a>
+                    </div>
+                    
+                    <!-- Engagement Info -->
+                    <div class="engagement-info">
+                        <span class="engagement-label">PREFERRED ENGAGEMENT:</span>
+                        <span class="engagement-value">{{ portfolio.engagement_tier|title }}</span>
+                    </div>
+                    
+                    <!-- Block Button -->
+                    <button class="block-btn">RESTRICT CONNECTION</button>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-members">
+                <h3>No portfolios available at the moment</h3>
+                <p>Check back soon or refine your search criteria.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Pagination -->
+    {% if portfolios.has_other_pages %}
+    <div class="pagination">
+        {% if portfolios.has_previous %}
+        <a href="?page={{ portfolios.previous_page_number }}" class="page-link">← Previous</a>
+        {% endif %}
+        
+        <span class="page-info">
+            Page {{ portfolios.number }} of {{ portfolios.paginator.num_pages }}
+        </span>
+        
+        {% if portfolios.has_next %}
+        <a href="?page={{ portfolios.next_page_number }}" class="page-link">Next →</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Dashboard Container */
+    .member-dashboard {
+        background: #0a0a0a;
+        color: #fff;
+        min-height: 100vh;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    
+    /* Top Navigation */
+    .member-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background: linear-gradient(90deg, #111 0%, #222 100%);
+        border-bottom: 2px solid #d4af37;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    
+    .nav-left h1 {
+        color: #d4af37;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        margin: 0;
+    }
+    
+    .nav-right {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .nav-btn {
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-transform: uppercase;
+    }
+    
+    .nav-btn:hover {
+        background: rgba(212, 175, 55, 0.3);
+        border-color: #d4af37;
+        transform: translateY(-2px);
+    }
+    
+    .approve-btn {
+        background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+        color: #000;
+        font-weight: 700;
+    }
+    
+    .upgrade-btn {
+        background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+        color: #000;
+        font-weight: 700;
+    }
+    
+    /* Search Filters */
+    .search-filters {
+        background: rgba(20, 20, 20, 0.95);
+        padding: 30px 40px;
+        margin: 20px 40px;
+        border-radius: 12px;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    
+    .filters-header h2 {
+        color: #d4af37;
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+        text-align: center;
+        letter-spacing: 1px;
+        font-weight: 300;
+    }
+    
+    .filter-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        align-items: end;
+    }
+    
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .filter-group label {
+        color: #aaa;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .filter-select, .location-input, .age-input {
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        color: #fff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-select:focus, .location-input:focus, .age-input:focus {
+        outline: none;
+        border-color: #d4af37;
+        box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    }
+    
+    .age-range {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .age-input {
+        width: 80px;
+        text-align: center;
+    }
+    
+    .age-range span {
+        color: #aaa;
+    }
+    
+    .search-now-btn, .view-all-btn {
+        padding: 12px 25px;
+        border-radius: 6px;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .search-now-btn {
+        background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+        color: #000;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .search-now-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+    
+    .view-all-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+    }
+    
+    .view-all-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Members Grid */
+    .members-grid-container {
+        padding: 20px 40px;
+    }
+    
+    .members-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 25px;
+    }
+    
+    .member-card {
+        background: rgba(30, 30, 30, 0.9);
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .member-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(212, 175, 55, 0.5);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    
+    .member-image {
+        height: 200px;
+        position: relative;
+        background: linear-gradient(135deg, #222 0%, #111 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .member-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .member-initial {
+        font-size: 4rem;
+        color: #d4af37;
+        font-weight: 300;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .online-indicator {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #95a5a6;
+        border: 2px solid #222;
+    }
+    
+    .online-indicator.online {
+        background: #2ecc71;
+        box-shadow: 0 0 10px #2ecc71;
+    }
+    
+    /* Member Info */
+    .member-info {
+        padding: 20px;
+    }
+    
+    .member-username {
+        color: #d4af37;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+    
+    .member-actions {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .action-btn {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        min-width: 80px;
+    }
+    
+    .message-btn {
+        background: rgba(52, 152, 219, 0.2);
+        color: #3498db;
+        border: 1px solid rgba(52, 152, 219, 0.4);
+    }
+    
+    .message-btn:hover {
+        background: rgba(52, 152, 219, 0.3);
+    }
+    
+    .favorite-btn {
+        background: rgba(241, 196, 15, 0.2);
+        color: #f1c40f;
+        border: 1px solid rgba(241, 196, 15, 0.4);
+    }
+    
+    .favorite-btn:hover {
+        background: rgba(241, 196, 15, 0.3);
+    }
+    
+    .view-btn {
+        background: rgba(46, 204, 113, 0.2);
+        color: #2ecc71;
+        border: 1px solid rgba(46, 204, 113, 0.4);
+    }
+    
+    .view-btn:hover {
+        background: rgba(46, 204, 113, 0.3);
+    }
+    
+    .engagement-info {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .engagement-label {
+        color: #aaa;
+        font-size: 0.85rem;
+        margin-right: 5px;
+    }
+    
+    .engagement-value {
+        color: #d4af37;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    
+    .block-btn {
+        width: 100%;
+        padding: 12px;
+        background: rgba(231, 76, 60, 0.1);
+        color: #e74c3c;
+        border: 1px solid rgba(231, 76, 60, 0.3);
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+    }
+    
+    .block-btn:hover {
+        background: rgba(231, 76, 60, 0.2);
+    }
+    
+    /* No Members */
+    .no-members {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 60px 20px;
+        background: rgba(30, 30, 30, 0.6);
+        border-radius: 15px;
+        border: 2px dashed rgba(212, 175, 55, 0.3);
+    }
+    
+    .no-members h3 {
+        color: #d4af37;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .no-members p {
+        color: #aaa;
+        font-size: 1.1rem;
+    }
+    
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin: 40px 0;
+        padding: 20px;
+        background: rgba(20, 20, 20, 0.8);
+        border-radius: 10px;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .page-link {
+        color: #d4af37;
+        text-decoration: none;
+        padding: 10px 25px;
+        background: rgba(212, 175, 55, 0.1);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 6px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .page-link:hover {
+        background: rgba(212, 175, 55, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    .page-info {
+        color: #aaa;
+        font-size: 0.95rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .members-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+        
+        .nav-right {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .member-nav {
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .search-filters {
+            margin: 20px;
+            padding: 20px;
+        }
+        
+        .filter-row {
+            grid-template-columns: 1fr;
+        }
+        
+        .members-grid-container {
+            padding: 20px;
+        }
+        
+        .members-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .member-actions {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Favorite button functionality
+    document.querySelectorAll('.favorite-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.dataset.userId;
+            const originalText = this.textContent;
+            
+            // Simulate AJAX call
+            this.textContent = 'FAVORITED ✓';
+            this.style.background = 'rgba(46, 204, 113, 0.3)';
+            this.style.color = '#2ecc71';
+            this.style.borderColor = '#27ae60';
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                this.textContent = originalText;
+                this.style.background = '';
+                this.style.color = '';
+                this.style.borderColor = '';
+            }, 2000);
+        });
+    });
+    
+    // Block button functionality
+    document.querySelectorAll('.block-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            if (confirm('Restrict connection with this individual?')) {
+                this.textContent = 'CONNECTION RESTRICTED';
+                this.style.background = 'rgba(231, 76, 60, 0.3)';
+                this.style.color = '#e74c3c';
+                this.disabled = true;
+            }
+        });
+    });
+</script>
+{% endblock %}

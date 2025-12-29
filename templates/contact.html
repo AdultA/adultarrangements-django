@@ -1,0 +1,76 @@
+<!-- templates/contact.html -->
+{% extends "base.html" %}
+
+{% block seo_title %}Contact Our Curation Team | Elite Lifestyle Connections{% endblock %}
+
+{% block seo_description %}Get in touch with our curation team for inquiries about elite lifestyle connections and portfolio management.{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="glass-card">
+                    <h1>Contact Our Curation Team</h1>
+                    <p class="lead">For inquiries regarding portfolio curation, membership, or general questions.</p>
+                    
+                    <div class="contact-info mt-5">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="contact-item">
+                                    <h4>Membership Inquiries</h4>
+                                    <p>membership@elitelifestyleconnections.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="contact-item">
+                                    <h4>Portfolio Support</h4>
+                                    <p>support@elitelifestyleconnections.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="contact-item">
+                                    <h4>Discretion & Safety</h4>
+                                    <p>safety@elitelifestyleconnections.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="contact-item">
+                                    <h4>General Inquiries</h4>
+                                    <p>info@elitelifestyleconnections.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        padding: 100px 0;
+        min-height: calc(100vh - 120px);
+    }
+    
+    .contact-item {
+        background: rgba(255,255,255,0.05);
+        padding: 1.5rem;
+        border-radius: 10px;
+        border-left: 3px solid #bf953f;
+    }
+    
+    .contact-item h4 {
+        color: #bf953f;
+        margin-bottom: 0.5rem;
+    }
+    
+    .contact-item p {
+        color: #ddd;
+        margin: 0;
+    }
+</style>
+{% endblock %}

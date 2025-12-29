@@ -1,0 +1,240 @@
+# main/models.py - UPDATED WITH CLASSY LANGUAGE
+from django.contrib.auth.models import User
+from django.db import models
+from django.utils import timezone
+
+class LifestyleProfile(models.Model):  # Changed from MemberProfile
+    """Elite Lifestyle Connections Profile"""
+    
+    # Gender Choices - Keep same
+    
+    # Lifestyle Preferences - REBRANDED
+    LIFESTYLE_PREFERENCE_CHOICES = [
+        ('curated_connections', 'Curated Connections'),
+        ('luxury_experiences', 'Luxury Experiences'),
+        ('mutual_benefit', 'Mutual Benefit'),
+    ]
+    
+    # Engagement Type - REBRANDED
+    ENGAGEMENT_TYPE_CHOICES = [
+        ('standard', 'Standard'),
+        ('premium', 'Premium'),
+        ('exclusive', 'Exclusive'),  # Changed from 'Diamond'
+    ]
+    
+    # Relationship Status - Sophisticated terms
+    RELATIONSHIP_CHOICES = [
+        ('discreetly_available', 'Discreetly Available'),
+        ('selectively_engaged', 'Selectively Engaged'),
+        ('unattached', 'Unattached'),
+        ('complicated_elegance', 'Complicated Elegance'),
+    ]
+    
+    # Lifestyle Attributes
+    LIFESTYLE_CHOICES = [
+        ('sophisticated', 'Sophisticated'),
+        ('luxury', 'Luxury'),
+        ('exclusive', 'Exclusive'),
+        ('discreet', 'Discreet'),
+        ('adventurous', 'Adventurous'),
+    ]
+    
+    # Expectation Framework - REBRANDED
+    EXPECTATION_CHOICES = [
+        ('discuss_in_person', 'Discuss in Person'),
+        ('curated_arrangement', 'Curated Arrangement'),
+        ('mutually_beneficial', 'Mutually Beneficial'),
+        ('experience_based', 'Experience Based'),
+    ]
+    
+    # Availability - Elegant terms
+    AVAILABILITY_CHOICES = [
+        ('selective_weekdays', 'Selective Weekdays'),
+        ('luxury_weekends', 'Luxury Weekends'),
+        ('evening_engagements', 'Evening Engagements'),
+        ('discreet_mornings', 'Discreet Mornings'),
+        ('flexible_elite', 'Flexible Elite'),
+    ]
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='lifestyle_profile')
+    
+    # === PERSONAL PORTFOLIO === (was Personal Information)
+    preferred_name = models.CharField(max_length=100, blank=True)  # was nickname
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
+    gender_preference = models.CharField(max_length=10, choices=GENDER_INTEREST_CHOICES, default='Both')
+    date_of_birth = models.DateField(null=True, blank=True)
+    
+    # === LIFESTYLE LOCATION ===
+    primary_location = models.CharField(max_length=255, blank=True)  # was location
+    secondary_locations = models.JSONField(default=list, blank=True)  # Additional locations
+    latitude = models.DecimalField(max_digits=10, decimal_places=8, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=11, decimal_places=8, null=True, blank=True)
+    
+    # === PORTFOLIO PRESENCE === (was Profile Details)
+    portfolio_image = models.ImageField(upload_to='portfolios/', null=True, blank=True)  # was profile_picture
+    personal_statement = models.TextField(blank=True)  # was heading
+    lifestyle_preference = models.CharField(max_length=50, choices=LIFESTYLE_PREFERENCE_CHOICES, blank=True)
+    
+    # === PERSONAL ATTRIBUTES ===
+    current_engagement = models.CharField(max_length=50, choices=RELATIONSHIP_CHOICES, blank=True)  # was relationship_status
+    physique = models.CharField(max_length=50, choices=BODY_TYPE_CHOICES, blank=True)  # was body_type
+    family_considerations = models.CharField(max_length=50, choices=CHILDREN_CHOICES, blank=True)  # was children
+    lifestyle_habits = models.CharField(max_length=50, choices=SMOKER_CHOICES, blank=True)  # was smoker
+    stature = models.CharField(max_length=50, choices=HEIGHT_CHOICES, blank=True)  # was height
+    financial_capacity = models.CharField(max_length=50, choices=NET_WORTH_CHOICES, blank=True)  # was net_worth
+    
+    # === PERSONAL NARRATIVE ===
+    personal_philosophy = models.TextField(blank=True)  # was description "About me"
+    seeking_qualities = models.TextField(blank=True)  # was describe_seeking "What I am looking for"
+    
+    # === IDEAL ENGAGEMENT === (was Arrangement Preferences)
+    preferred_engagements = models.JSONField(default=list)  # was type_of_arrangement
+    appreciates_qualities = models.JSONField(default=list)  # was seeking
+    availability_framework = models.JSONField(default=list)  # was availability
+    
+    # Expectations
+    expectation_framework = models.CharField(max_length=100, choices=EXPECTATION_CHOICES, blank=True)  # was looking_for
+    consideration_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # was arrangement_amount
+    consideration_period = models.CharField(max_length=50, choices=PERIOD_CHOICES, blank=True)  # was arrangement_period
+    
+    # === MEMBERSHIP STATUS ===
+    engagement_tier = models.CharField(max_length=20, choices=ENGAGEMENT_TYPE_CHOICES, default='standard')  # was membership_type
+    portfolio_suspended = models.BooleanField(default=False)  # was account_suspended
+    curator_approved = models.BooleanField(default=False)  # was admin_approval
+    public_portfolio = models.BooleanField(default=False)  # was public_profile
+    under_review = models.BooleanField(default=True)  # was account_pending_approval
+    enhanced_portfolio = models.BooleanField(default=False)  # was content_upgrade
+    curated_content = models.JSONField(null=True, blank=True)  # was approved_version_content
+    
+    # === VISUAL PORTFOLIO ===
+    lifestyle_images = models.JSONField(default=list)  # was additional_pictures
+    private_gallery = models.JSONField(default=list)  # was private_pictures
+    gallery_access = models.JSONField(default=dict)  # was private_pic_approved
+    gallery_requests = models.JSONField(default=dict)  # was private_pic_requests
+    
+    # === CONNECTION METRICS ===
+    saved_connections = models.JSONField(default=list)  # was favorites
+    restricted_connections = models.JSONField(default=list)  # was blocked_users
+    portfolio_views = models.JSONField(default=dict)  # was view_me
+    interest_received = models.JSONField(default=dict)  # was favorites_me
+    last_active = models.DateTimeField(null=True, blank=True)  # was last_seen
+    view_count = models.IntegerField(default=0)
+    
+    # === DATES ===
+    engagement_expiry = models.IntegerField(null=True, blank=True)  # was membership_expired_time
+    portfolio_created = models.DateTimeField(auto_now_add=True)  # was created_at
+    last_updated = models.DateTimeField(auto_now=True)  # was updated_at
+    
+    # === METHODS WITH CLASSY LANGUAGE ===
+    def get_life_stage(self):
+        """Calculate life stage from date_of_birth"""
+        if self.date_of_birth:
+            today = timezone.now().date()
+            years = today.year - self.date_of_birth.year - (
+                (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day)
+            )
+            if years < 25:
+                return "Emerging Sophisticate"
+            elif years < 35:
+                return "Established Professional"
+            elif years < 50:
+                return "Seasoned Connoisseur"
+            else:
+                return "Distinguished Elite"
+        return None
+    
+    def has_exclusive_access(self):
+        """Check if user has exclusive engagement tier"""
+        return self.engagement_tier in ['premium', 'exclusive']
+    
+    def get_preferred_engagements_display(self):
+        """Format preferred engagements for display"""
+        if isinstance(self.preferred_engagements, list):
+            return ', '.join(self.preferred_engagements)
+        return self.preferred_engagements or ''
+    
+    def update_activity(self):
+        """Update last activity timestamp"""
+        self.last_active = timezone.now()
+        self.save()
+    
+    def __str__(self):
+        return f"{self.preferred_name or self.user.username} - {self.get_engagement_tier_display()} Lifestyle Portfolio"
+
+class CuratedIntroduction(models.Model):  # Changed from Conversation
+    """Curated introduction between sophisticated individuals"""
+    participants = models.ManyToManyField(User, related_name='curated_introductions')
+    last_exchange = models.ForeignKey('DiscreetMessage', on_delete=models.SET_NULL, null=True, related_name='latest_in_introduction')
+    introduction_initiated = models.DateTimeField(auto_now_add=True)  # was created_at
+    last_interaction = models.DateTimeField(auto_now=True)  # was updated_at
+    
+    def get_other_participant(self, user):
+        """Get the other individual in the introduction"""
+        return self.participants.exclude(id=user.id).first()
+    
+    def get_unread_exchanges(self, user):
+        """Count unread exchanges for an individual"""
+        return self.discreet_messages.filter(is_read=False).exclude(sender=user).count()
+    
+    class Meta:
+        ordering = ['-last_interaction']
+        verbose_name = 'Curated Introduction'
+        verbose_name_plural = 'Curated Introductions'
+
+class DiscreetMessage(models.Model):  # Changed from Message
+    """Discreet message exchange"""
+    introduction = models.ForeignKey(CuratedIntroduction, on_delete=models.CASCADE, related_name='discreet_messages')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_exchanges')
+    content = models.TextField()
+    is_read = models.BooleanField(default=False)
+    exchanged_at = models.DateTimeField(auto_now_add=True)  # was created_at
+    
+    def acknowledge_receipt(self):
+        """Acknowledge message receipt"""
+        self.is_read = True
+        self.save()
+    
+    class Meta:
+        ordering = ['exchanged_at']
+        verbose_name = 'Discreet Exchange'
+        verbose_name_plural = 'Discreet Exchanges'
+
+class ExclusiveExperience(models.Model):  # Changed from HotDate
+    """Exclusive experience listings"""
+    host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='hosted_experiences')  # was user
+    experience_title = models.CharField(max_length=200)  # was title
+    venue = models.CharField(max_length=200)  # was location
+    experience_date = models.DateField()  # was date
+    commencement = models.TimeField()  # was time_start
+    conclusion = models.TimeField()  # was time_end
+    experience_description = models.TextField()  # was description
+    consideration = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # was amount
+    consideration_type = models.CharField(max_length=50, choices=[
+        ('hosted_experience', 'Hosted Experience'),
+        ('seeking_participant', 'Seeking Participant'),
+    ])  # was amount_type
+    is_active = models.BooleanField(default=True)
+    listed_at = models.DateTimeField(auto_now_add=True)  # was created_at
+    
+    def __str__(self):
+        return f"{self.experience_title} - {self.experience_date}"
+    
+    class Meta:
+        verbose_name = 'Exclusive Experience'
+        verbose_name_plural = 'Exclusive Experiences'
+
+class GalleryAccessRequest(models.Model):  # Changed from PhotoRequest
+    """Private gallery access requests"""
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='gallery_requests_sent')
+    gallery_owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='gallery_requests_received')
+    access_status = models.CharField(max_length=20, choices=[
+        ('pending_review', 'Pending Review'),
+        ('access_granted', 'Access Granted'),
+        ('access_declined', 'Access Declined'),
+    ], default='pending_review')  # was status
+    requested_at = models.DateTimeField(auto_now_add=True)  # was created_at
+    
+    class Meta:
+        unique_together = ['requester', 'gallery_owner']
+        verbose_name = 'Gallery Access Request'
+        verbose_name_plural = 'Gallery Access Requests'

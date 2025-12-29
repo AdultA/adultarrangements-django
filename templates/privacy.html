@@ -1,0 +1,154 @@
+<!-- templates/privacy.html -->
+{% extends "base.html" %}
+
+{% block seo_title %}Privacy Charter | Adult Arrangements{% endblock %}
+
+{% block seo_description %}Read our Privacy Charter detailing how we protect your information in our exclusive community of accomplished individuals seeking meaningful connections.{% endblock %}
+
+{% block og_title %}Privacy Charter | Adult Arrangements{% endblock %}
+
+{% block og_description %}Our commitment to protecting your privacy and information.{% endblock %}
+
+{% block content %}
+<div class="legal-wrapper">
+    <div class="legal-header">
+        <h1>Privacy Charter</h1>
+        <p>Effective: December 2025</p>
+    </div>
+    
+    <div class="legal-document">
+        <h2 style="font-family: 'Cinzel', serif; margin-bottom: 1.5rem; text-align: center;">Our Commitment to Discretion</h2>
+        
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            At Adult Arrangements, we understand the importance of discretion and privacy for our members. 
+            This Privacy Charter explains how we collect, use, disclose, and safeguard your information within 
+            our exclusive community of accomplished individuals.
+        </p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Information We Collect</h3>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: #ccc; line-height: 1.6;">
+            <li style="margin-bottom: 0.5rem;"><strong>Personal Information:</strong> Name, email address, date of birth, preferences</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Portfolio Information:</strong> Lifestyle interests, biography, engagement preferences</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Activity Data:</strong> Engagement patterns, preferences, and interaction history</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Verification Data:</strong> Identity verification documents (securely stored and encrypted)</li>
+        </ul>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">How We Use Your Information</h3>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: #ccc; line-height: 1.6;">
+            <li style="margin-bottom: 0.5rem;">To create and maintain your exclusive membership portfolio</li>
+            <li style="margin-bottom: 0.5rem;">To verify member identities and ensure community safety</li>
+            <li style="margin-bottom: 0.5rem;">To facilitate compatible introductions between members</li>
+            <li style="margin-bottom: 0.5rem;">To provide discreet support and respond to inquiries</li>
+            <li style="margin-bottom: 0.5rem;">To enhance our platform and member experience</li>
+        </ul>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Data Security & Discretion</h3>
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            We employ enterprise-grade encryption, secure servers, and strict access controls to protect your data. 
+            All personal information is stored with military-grade encryption and accessible only to authorized 
+            personnel under strict confidentiality agreements.
+        </p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Information Sharing</h3>
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            We do not sell, trade, or rent your personal information to third parties. Your portfolio information 
+            is shared only with compatible members as part of our introduction service, and only the information 
+            you explicitly choose to share.
+        </p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Your Rights & Control</h3>
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            You have the right to access, correct, or remove your personal information at any time. 
+            To exercise these rights, contact our discretion team at discretion@adultarrangements.com.
+        </p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Platform Purpose Statement</h3>
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            Adult Arrangements is an exclusive social networking platform for adults seeking genuine connections 
+            and shared experiences. The platform is strictly for social networking and companionship purposes. 
+            Any solicitation or explicit negotiation of services for money is strictly prohibited and will result 
+            in immediate membership termination.
+        </p>
+        
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; color: #888; font-size: 0.9rem; line-height: 1.6; text-align: center;">
+            <p>For questions about this Privacy Charter, contact:<br>
+            <strong>Discretion Officer</strong><br>
+            Adult Arrangements<br>
+            discretion@adultarrangements.com</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .legal-wrapper {
+        padding: 6rem 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .legal-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .legal-header h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .legal-header p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+    }
+
+    .legal-document {
+        background: var(--glass-bg);
+        backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        border-radius: 20px;
+        padding: 4rem;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        line-height: 1.6;
+        text-align: left;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+        .legal-wrapper {
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+        
+        .legal-document {
+            padding: 2rem;
+            text-align: left;
+        }
+        
+        .legal-header h1 {
+            font-size: 2rem;
+        }
+        
+        .legal-document h2 {
+            text-align: center !important;
+            font-size: 1.5rem;
+        }
+        
+        .legal-document h3 {
+            font-size: 1.2rem;
+        }
+        
+        .legal-document ul {
+            margin-left: 1rem;
+        }
+        
+        .legal-document li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+    }
+</style>
+{% endblock %}

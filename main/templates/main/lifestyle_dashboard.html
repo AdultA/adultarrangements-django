@@ -1,0 +1,613 @@
+<!-- main/templates/main/lifestyle_dashboard.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block description %}{{ description }}{% endblock %}
+
+{% block content %}
+<div class="lifestyle-dashboard">
+    <!-- Header -->
+    <div class="dashboard-header">
+        <h1><i class="fas fa-user-circle"></i> <span>Your Lifestyle Dashboard</span></h1>
+        <p class="dashboard-subtitle">Discover compatible individuals for meaningful connections</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="engagement-metrics">
+        <div class="metric-card">
+            <div class="metric-value">{{ portfolios|length }}</div>
+            <div class="metric-label">Compatible Portfolios</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">{{ user_profile.interest_received|length|default:"0" }}</div>
+            <div class="metric-label">Expressions of Interest</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">{{ user_profile.portfolio_views|length|default:"0" }}</div>
+            <div class="metric-label">Portfolio Views</div>
+        </div>
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="compatible-portfolios-section">
+        <h2>Recently Active Compatible Individuals</h2>
+        <p class="section-subtitle">Discover individuals whose lifestyle preferences align with yours</p>
+        
+        {% if portfolios %}
+        <div class="portfolios-grid">
+            {% for portfolio in portfolios %}
+            <div class="portfolio-card">
+                <a href="#" class="portfolio-link">
+                    <div class="portfolio-image">
+                        {% if portfolio.portfolio_image %}
+                            <img src="{{ portfolio.portfolio_image.url }}" 
+                                 alt="{{ portfolio.preferred_name }}'s portfolio image">
+                        {% else %}
+                            <div class="portfolio-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        {% endif %}
+                        
+                        {% if portfolio.has_exclusive_access %}
+                        <div class="exclusive-badge">
+                            <i class="fas fa-crown"></i> Exclusive Tier
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="portfolio-details">
+                        <h3 class="portfolio-name">{{ portfolio.preferred_name|default:portfolio.user.username }}</h3>
+                        <div class="portfolio-location">
+                            <i class="fas fa-map-marker-alt"></i> {{ portfolio.primary_location|default:"Location not specified" }}
+                        </div>
+                        <div class="portfolio-life-stage">
+                            <i class="fas fa-birthday-cake"></i> {{ portfolio.get_life_stage|default:"Sophisticated Individual" }}
+                        </div>
+                        <div class="portfolio-statement">
+                            {{ portfolio.personal_statement|truncatechars:80|default:"Seeking meaningful connections" }}
+                        </div>
+                    </div>
+                </a>
+                
+                <div class="portfolio-actions">
+                    <button class="btn-express-interest">
+                        <i class="fas fa-heart"></i>
+                        <span>Save Connection</span>
+                    </button>
+                    
+                    <button class="btn-initiate-exchange">
+                        <i class="fas fa-envelope"></i>
+                        <span>Discreet Message</span>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="dashboard-actions">
+            <a href="{% url 'curated_search' %}" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+                <span>Refined Search</span>
+            </a>
+        </div>
+        {% else %}
+        <div class="no-compatible-message">
+            <div class="message-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>Refine Your Lifestyle Preferences</h3>
+            <p>Update your portfolio preferences to discover compatible individuals.</p>
+            <a href="{% url 'edit_portfolio' %}" class="btn btn-primary">
+                Refine Preferences
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Engagement Status -->
+    <div class="engagement-status-card">
+        <div class="status-header">
+            <h3>Your Engagement Status</h3>
+            <span class="engagement-tier {{ user_profile.engagement_tier|default:'standard' }}">
+                {{ user_profile.get_engagement_tier_display|default:"Standard" }}
+            </span>
+        </div>
+        
+        <div class="status-details">
+            <p><strong>Portfolio Status:</strong> 
+                {% if user_profile.curator_approved %}
+                <span class="status-approved">Curator Approved</span>
+                {% else %}
+                <span class="status-pending">Under Review</span>
+                {% endif %}
+            </p>
+            
+            <p><strong>Last Updated:</strong> {{ user_profile.last_updated|date:"F j, Y"|default:"Not available" }}</p>
+            <p><strong>Portfolio Views:</strong> {{ user_profile.view_count|default:"0" }}</p>
+        </div>
+        
+        <div class="status-actions">
+            <a href="{% url 'edit_portfolio' %}" class="btn btn-outline">
+                <i class="fas fa-edit"></i>
+                Refine Portfolio
+            </a>
+            
+            <a href="{% url 'engagement_management' %}" class="btn btn-outline">
+                <i class="fas fa-cog"></i>
+                Manage Engagement
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Dashboard Styles */
+.lifestyle-dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.dashboard-header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.dashboard-header .fas {
+    color: #8B7355; /* Gold color */
+    margin-right: 10px;
+}
+
+.dashboard-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Metrics */
+.engagement-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.metric-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #8B7355;
+    margin-bottom: 10px;
+}
+
+.metric-label {
+    color: #666;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Portfolios Grid */
+.compatible-portfolios-section {
+    margin-bottom: 40px;
+}
+
+.compatible-portfolios-section h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.portfolios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.portfolio-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.portfolio-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.portfolio-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+}
+
+.portfolio-placeholder .fas {
+    font-size: 4rem;
+}
+
+.exclusive-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #8B7355;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.portfolio-details {
+    padding: 20px;
+}
+
+.portfolio-name {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.portfolio-location,
+.portfolio-life-stage {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.portfolio-statement {
+    color: #777;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+.portfolio-actions {
+    padding: 0 20px 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.portfolio-actions button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-express-interest {
+    background: #f8f8f8;
+    color: #333;
+}
+
+.btn-express-interest:hover {
+    background: #eee;
+}
+
+.btn-initiate-exchange {
+    background: #8B7355;
+    color: white;
+}
+
+.btn-initiate-exchange:hover {
+    background: #7a6245;
+}
+
+/* Dashboard Actions */
+.dashboard-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #8B7355;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #7a6245;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #8B7355;
+    color: #8B7355;
+}
+
+.btn-outline:hover {
+    background: #8B7355;
+    color: white;
+    text-decoration: none;
+}
+
+/* No Compatible Message */
+.no-compatible-message {
+    text-align: center;
+    padding: 50px 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin: 30px 0;
+}
+
+.message-icon {
+    font-size: 3rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.no-compatible-message h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.no-compatible-message p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Engagement Status Card */
+.engagement-status-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 40px;
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.status-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.engagement-tier {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.engagement-tier.exclusive {
+    background: #8B7355;
+    color: white;
+}
+
+.engagement-tier.premium {
+    background: #d4af37;
+    color: white;
+}
+
+.engagement-tier.standard {
+    background: #6c757d;
+    color: white;
+}
+
+.status-details p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.status-details strong {
+    color: #333;
+}
+
+.status-approved {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.status-pending {
+    color: #ffc107;
+    font-weight: 500;
+}
+
+.status-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lifestyle-dashboard {
+        padding: 15px;
+    }
+    
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+    
+    .portfolios-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-actions {
+        flex-direction: column;
+    }
+    
+    .portfolio-actions {
+        flex-direction: column;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Save connection functionality
+    document.querySelectorAll('.btn-express-interest').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const icon = this.querySelector('i');
+            const text = this.querySelector('span');
+            
+            // Toggle state
+            if (icon.classList.contains('fas')) {
+                // Already saved, remove
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                text.textContent = 'Save Connection';
+                this.style.background = '#f8f8f8';
+            } else {
+                // Not saved, add
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                text.textContent = 'Connection Saved';
+                this.style.background = '#ff6b6b';
+                this.style.color = 'white';
+            }
+            
+            // Show notification
+            showNotification('Connection status updated', 'success');
+        });
+    });
+    
+    // Initiate message functionality
+    document.querySelectorAll('.btn-initiate-exchange').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            showNotification('Discreet messaging feature coming soon', 'info');
+        });
+    });
+    
+    function showNotification(message, type) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#28a745' : '#17a2b8'};
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease-in';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+    
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
+{% endblock %}

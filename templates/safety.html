@@ -1,0 +1,517 @@
+<!-- templates/safety.html - FIXED VERSION -->
+{% extends "base.html" %}
+
+{% block seo_title %}Discretion & Safety | Adult Arrangements{% endblock %}
+
+{% block seo_description %}Learn about our comprehensive safety measures, discretion protocols, and support systems designed to protect members of our exclusive community.{% endblock %}
+
+{% block og_title %}Discretion & Safety | Adult Arrangements{% endblock %}
+
+{% block og_description %}Our commitment to member safety, discretion, and support.{% endblock %}
+
+{% block content %}
+<div class="safety-wrapper">
+    <div class="safety-header">
+        <h1>Discretion & Safety</h1>
+        <p class="subtitle">Our Commitment to Your Well-being</p>
+    </div>
+    
+    <div class="safety-content">
+        
+        <!-- Security Features Section -->
+        <div class="safety-section">
+            <div class="safety-icon">🛡️</div>
+            <h2>Comprehensive Security Protocols</h2>
+            <p>We employ multiple layers of security to ensure your information and interactions remain protected at all times.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <h3>Identity Verification</h3>
+                    <p>All members undergo a discreet verification process to confirm identity and age, ensuring a community of genuine individuals.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <h3>Military-Grade Encryption</h3>
+                    <p>All data is encrypted using AES-256 encryption, the same standard used by financial institutions and government agencies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <h3>Secure Communication</h3>
+                    <p>Our messaging platform features end-to-end encryption, with no third-party access to your private conversations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">04</div>
+                    <h3>Data Protection</h3>
+                    <p>Your information is stored on secure servers with regular security audits and penetration testing.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Discretion Guidelines -->
+        <div class="safety-section">
+            <div class="safety-icon">🤫</div>
+            <h2>Discretion Guidelines</h2>
+            <p>Maintaining privacy is fundamental to our community. We provide clear guidelines for respectful interaction.</p>
+            
+            <div class="guidelines">
+                <div class="guideline">
+                    <h3>Respect Privacy</h3>
+                    <p>Never share another member's personal information, photos, or communications without explicit consent.</p>
+                </div>
+                
+                <div class="guideline">
+                    <h3>Professional Conduct</h3>
+                    <p>Maintain respectful and appropriate communication at all times. Harassment or inappropriate behavior is not tolerated.</p>
+                </div>
+                
+                <div class="guideline">
+                    <h3>Meeting Safety</h3>
+                    <p>Always meet in public places initially, inform a friend of your plans, and trust your instincts.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Support Systems -->
+        <div class="safety-section">
+            <div class="safety-icon">🤝</div>
+            <h2>Support Systems</h2>
+            <p>We provide comprehensive support to ensure a positive experience for all members.</p>
+            
+            <div class="support-options">
+                <div class="support-card">
+                    <h3>24/7 Moderation</h3>
+                    <p>Our moderation team reviews profiles and monitors for inappropriate behavior around the clock.</p>
+                    <div class="support-contact">
+                        <strong>Report Concerns:</strong> report@adultarrangements.com
+                    </div>
+                </div>
+                
+                <div class="support-card">
+                    <h3>Member Support</h3>
+                    <p>Dedicated support team available to assist with any questions or concerns about your membership.</p>
+                    <div class="support-contact">
+                        <strong>General Support:</strong> support@adultarrangements.com
+                    </div>
+                </div>
+                
+                <div class="support-card">
+                    <h3>Safety Resources</h3>
+                    <p>Access to safety guides, meeting checklists, and resources for secure online interaction.</p>
+                    <div class="support-contact">
+                        <strong>Resources:</strong> safety@adultarrangements.com
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Emergency Section -->
+        <div class="emergency-section">
+            <div class="emergency-icon">🚨</div>
+            <h2>Immediate Assistance</h2>
+            <p>If you feel unsafe or encounter threatening behavior, take immediate action:</p>
+            
+            <div class="emergency-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p><strong>Block the member</strong> immediately using the block feature in their profile</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p><strong>Report the incident</strong> to our safety team at safety@adultarrangements.com</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p><strong>Contact authorities</strong> if you feel physically threatened or unsafe</p>
+                </div>
+            </div>
+            
+            <div class="emergency-note">
+                <p><strong>Important:</strong> Adult Arrangements is a social networking platform for companionship. If you encounter any requests for illegal activities or feel uncomfortable, cease communication and report immediately.</p>
+            </div>
+        </div>
+        
+        <!-- Final CTA - FIXED: Removed broken contact link -->
+        <div class="safety-cta">
+            <h3>Your Safety is Our Priority</h3>
+            <p>We continuously enhance our safety measures to provide a secure environment for meaningful connections.</p>
+            <div class="cta-buttons">
+                <a href="{% url 'register' %}" class="cta-button">Join Our Secure Community</a>
+                <!-- REMOVED: <a href="{% url 'contact' %}" class="cta-button-secondary">Contact Safety Team</a> -->
+                <a href="mailto:safety@adultarrangements.com" class="cta-button-secondary">Contact Safety Team</a>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .safety-wrapper {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .safety-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .safety-header h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+    }
+    
+    .safety-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+    
+    .safety-section {
+        background: var(--glass-bg);
+        backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        border-radius: 24px;
+        padding: 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .safety-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gold-gradient);
+    }
+    
+    .safety-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .safety-section h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: #fff;
+    }
+    
+    .safety-section > p {
+        color: #ccc;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .feature-card {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(191, 149, 63, 0.3);
+    }
+    
+    .feature-number {
+        font-family: 'Cinzel', serif;
+        font-size: 2rem;
+        color: #bf953f;
+        margin-bottom: 1rem;
+        opacity: 0.7;
+    }
+    
+    .feature-card h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: #fff;
+    }
+    
+    .feature-card p {
+        color: #aaa;
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+    
+    /* Guidelines */
+    .guidelines {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .guideline {
+        background: rgba(0, 0, 0, 0.2);
+        border-left: 3px solid #bf953f;
+        padding: 1.5rem;
+        border-radius: 0 8px 8px 0;
+    }
+    
+    .guideline h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        color: #fff;
+    }
+    
+    .guideline p {
+        color: #aaa;
+        line-height: 1.5;
+    }
+    
+    /* Support Options */
+    .support-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .support-card {
+        background: linear-gradient(135deg, rgba(10, 50, 80, 0.2) 0%, rgba(10, 30, 50, 0.4) 100%);
+        border: 1px solid rgba(100, 180, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+    }
+    
+    .support-card h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: #fff;
+    }
+    
+    .support-card p {
+        color: #aaa;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+    
+    .support-contact {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        color: #bf953f;
+        border: 1px solid rgba(191, 149, 63, 0.2);
+    }
+    
+    /* Emergency Section */
+    .emergency-section {
+        background: linear-gradient(135deg, rgba(80, 10, 20, 0.2) 0%, rgba(50, 10, 15, 0.4) 100%);
+        border: 1px solid rgba(255, 50, 50, 0.2);
+        border-radius: 24px;
+        padding: 3rem;
+    }
+    
+    .emergency-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .emergency-section h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: #fff;
+    }
+    
+    .emergency-section > p {
+        color: #ccc;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+    
+    .emergency-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .step {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .step-number {
+        background: #bf953f;
+        color: #000;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+    
+    .step p {
+        color: #ccc;
+        line-height: 1.5;
+    }
+    
+    .emergency-note {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 100, 100, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .emergency-note p {
+        color: #ff9999;
+        line-height: 1.6;
+    }
+    
+    /* Safety CTA */
+    .safety-cta {
+        background: var(--glass-bg);
+        backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        border-radius: 24px;
+        padding: 3rem;
+        text-align: center;
+    }
+    
+    .safety-cta h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #fff;
+    }
+    
+    .safety-cta p {
+        color: #ccc;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .cta-button {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background: var(--gold-gradient);
+        color: #000;
+        font-weight: 600;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: 0.3s;
+        box-shadow: var(--accent-glow);
+        border: none;
+        cursor: pointer;
+        min-width: 200px;
+    }
+    
+    .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(191, 149, 63, 0.6);
+    }
+    
+    .cta-button-secondary {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background: transparent;
+        color: #bf953f;
+        font-weight: 600;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: 0.3s;
+        border: 2px solid #bf953f;
+        cursor: pointer;
+        min-width: 200px;
+    }
+    
+    .cta-button-secondary:hover {
+        background: rgba(191, 149, 63, 0.1);
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+        .safety-wrapper {
+            padding: 4rem 1rem;
+        }
+        
+        .safety-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .safety-section {
+            padding: 2rem;
+        }
+        
+        .feature-grid,
+        .guidelines,
+        .support-options,
+        .emergency-steps {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cta-button,
+        .cta-button-secondary {
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .safety-cta {
+            padding: 2rem;
+        }
+    }
+</style>
+{% endblock %}

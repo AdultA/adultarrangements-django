@@ -1,0 +1,140 @@
+<!-- main/templates/main/edit_portfolio.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block description %}{{ description }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Edit Your Portfolio</h1>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Preferred Name</label>
+                                    {{ form.preferred_name }}
+                                    {% if form.preferred_name.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.preferred_name.errors %}
+                                        {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Gender</label>
+                                    {{ form.gender }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Date of Birth</label>
+                                    {{ form.date_of_birth }}
+                                    {% if form.date_of_birth.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.date_of_birth.errors %}
+                                        {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Primary Location</label>
+                                    {{ form.primary_location }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Personal Statement</label>
+                            {{ form.personal_statement }}
+                            <div class="form-text">A brief headline about yourself</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Personal Philosophy</label>
+                            {{ form.personal_philosophy }}
+                            <div class="form-text">Tell us about yourself</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Seeking Qualities</label>
+                            {{ form.seeking_qualities }}
+                            <div class="form-text">What are you looking for in a connection?</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Portfolio Image</label>
+                            {{ form.portfolio_image }}
+                            {% if profile.portfolio_image %}
+                            <div class="mt-2">
+                                <img src="{{ profile.portfolio_image.url }}" alt="Current image" style="max-width: 200px;">
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save Portfolio</button>
+                        <a href="{% url 'lifestyle_dashboard' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Portfolio Status</h5>
+                    <p class="card-text">
+                        {% if profile.curator_approved %}
+                        <span class="badge bg-success">Approved</span>
+                        {% elif profile.under_review %}
+                        <span class="badge bg-warning">Under Review</span>
+                        {% else %}
+                        <span class="badge bg-secondary">Not Submitted</span>
+                        {% endif %}
+                    </p>
+                    
+                    <h5 class="card-title mt-3">Tips</h5>
+                    <ul class="small">
+                        <li>Use a clear, recent photo</li>
+                        <li>Be honest about your interests</li>
+                        <li>Complete all fields for best results</li>
+                        <li>Changes may require re-approval</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.form-control, .form-select {
+    margin-bottom: 5px;
+}
+</style>
+{% endblock %}

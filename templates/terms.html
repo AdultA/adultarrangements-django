@@ -1,0 +1,156 @@
+<!-- templates/terms.html -->
+{% extends "base.html" %}
+
+{% block seo_title %}Terms of Membership | Adult Arrangements{% endblock %}
+
+{% block seo_description %}Read the Terms of Membership for our exclusive community of accomplished individuals seeking meaningful connections and shared appreciation for life's finer moments.{% endblock %}
+
+{% block og_title %}Terms of Membership | Adult Arrangements{% endblock %}
+
+{% block og_description %}The terms governing membership in our exclusive community.{% endblock %}
+
+{% block content %}
+<div class="legal-wrapper">
+    <div class="legal-header">
+        <h1>Terms of Membership</h1>
+        <p>Effective: December 2025</p>
+    </div>
+    
+    <div class="legal-document">
+        <h2 style="font-family: 'Cinzel', serif; margin-bottom: 1.5rem; text-align: center;">Membership Agreement</h2>
+        
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            By accessing and using Adult Arrangements, you accept and agree to be bound by these Terms of Membership. 
+            If you do not agree, you must not use our services.
+        </p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Eligibility Requirements</h3>
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            You must be at least 21 years old to join Adult Arrangements. 
+            By creating a membership, you represent and warrant that you meet this age requirement 
+            and all information provided is accurate and truthful.
+        </p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Membership Standards</h3>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: #ccc; line-height: 1.6;">
+            <li style="margin-bottom: 0.5rem;">Provide accurate information during the membership application</li>
+            <li style="margin-bottom: 0.5rem;">Maintain respectful and considerate conduct with all members</li>
+            <li style="margin-bottom: 0.5rem;">Use the platform only for its intended purpose of social networking and companionship</li>
+            <li style="margin-bottom: 0.5rem;">Comply with all applicable laws and regulations</li>
+            <li style="margin-bottom: 0.5rem;">Respect the privacy and discretion of fellow members</li>
+        </ul>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Prohibited Activities</h3>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: #ccc; line-height: 1.6;">
+            <li style="margin-bottom: 0.5rem;">Harassment, abuse, or threatening behavior toward any member</li>
+            <li style="margin-bottom: 0.5rem;">Impersonation or false representation of identity or status</li>
+            <li style="margin-bottom: 0.5rem;">Commercial solicitation, advertising, or spamming</li>
+            <li style="margin-bottom: 0.5rem;">Sharing explicit or inappropriate content without consent</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Any solicitation or explicit negotiation of sexual services for money</strong></li>
+            <li style="margin-bottom: 0.5rem;">Any activities that violate applicable laws</li>
+        </ul>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Platform Purpose Declaration</h3>
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            Adult Arrangements is an exclusive social networking platform for adults seeking genuine connections 
+            and shared experiences. The platform is strictly for social networking and companionship purposes. 
+            Any discussion or negotiation of financial arrangements in exchange for companionship is strictly 
+            prohibited and violates the fundamental purpose of our community.
+        </p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Membership Termination</h3>
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            We reserve the right to suspend or terminate memberships that violate these terms. 
+            Members may appeal termination by contacting membership@adultarrangements.com within 
+            30 days of termination notice.
+        </p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: #bf953f;">Discretion & Confidentiality</h3>
+        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;">
+            Members agree to maintain the confidentiality of other members' identities and information. 
+            Sharing of private communications or personal information without consent is grounds for 
+            immediate membership termination.
+        </p>
+        
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; color: #888; font-size: 0.9rem; line-height: 1.6; text-align: center;">
+            <p>For questions about these Terms of Membership, contact:<br>
+            <strong>Membership Department</strong><br>
+            Adult Arrangements<br>
+            membership@adultarrangements.com</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .legal-wrapper {
+        padding: 6rem 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .legal-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .legal-header h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .legal-header p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+    }
+
+    .legal-document {
+        background: var(--glass-bg);
+        backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        border-radius: 20px;
+        padding: 4rem;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        line-height: 1.6;
+        text-align: left;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+        .legal-wrapper {
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+        
+        .legal-document {
+            padding: 2rem;
+            text-align: left;
+        }
+        
+        .legal-header h1 {
+            font-size: 2rem;
+        }
+        
+        .legal-document h2 {
+            text-align: center !important;
+            font-size: 1.5rem;
+        }
+        
+        .legal-document h3 {
+            font-size: 1.2rem;
+        }
+        
+        .legal-document ul {
+            margin-left: 1rem;
+        }
+        
+        .legal-document li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+    }
+</style>
+{% endblock %}

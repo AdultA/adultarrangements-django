@@ -1,0 +1,359 @@
+<!-- /Users/carlsng/Desktop/adultarrangements-django/templates/main/edit_portfolio.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Portfolio | Elite Lifestyle Connections</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .header p {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+        
+        .portfolio-form {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .form-section h2 {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .image-upload {
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload:hover {
+            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .image-upload input {
+            display: none;
+        }
+        
+        .image-upload label {
+            color: #d4af37;
+            font-size: 1rem;
+            cursor: pointer;
+            display: block;
+        }
+        
+        .image-upload i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #d4af37;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        
+        .alert-success {
+            background: rgba(46, 204, 113, 0.15);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+        }
+        
+        .alert-error {
+            background: rgba(231, 76, 60, 0.15);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .portfolio-form {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Refine Your Lifestyle Portfolio</h1>
+            <p>Update your personal portfolio to showcase your sophistication and attract compatible connections</p>
+        </div>
+        
+        {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="POST" enctype="multipart/form-data" class="portfolio-form">
+            {% csrf_token %}
+            
+            <!-- Basic Information Section -->
+            <div class="form-section">
+                <h2>Personal Details</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="id_preferred_name">Preferred Name</label>
+                        <input type="text" id="id_preferred_name" name="preferred_name" 
+                               value="{{ form.preferred_name.value|default:'' }}" 
+                               placeholder="How you'd like to be addressed">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_gender">Gender</label>
+                        <select id="id_gender" name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="Male" {% if form.gender.value == "Male" %}selected{% endif %}>Male</option>
+                            <option value="Female" {% if form.gender.value == "Female" %}selected{% endif %}>Female</option>
+                            <option value="Other" {% if form.gender.value == "Other" %}selected{% endif %}>Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_date_of_birth">Date of Birth</label>
+                        <input type="date" id="id_date_of_birth" name="date_of_birth" 
+                               value="{{ form.date_of_birth.value|date:'Y-m-d'|default:'' }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_primary_location">Primary Location</label>
+                        <input type="text" id="id_primary_location" name="primary_location" 
+                               value="{{ form.primary_location.value|default:'' }}" 
+                               placeholder="City, State, or Region">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Portfolio Image Section -->
+            <div class="form-section">
+                <h2>Portfolio Image</h2>
+                <div class="image-upload">
+                    <div class="form-group">
+                        <label for="id_portfolio_image">
+                            <i>📷</i>
+                            <span>Click to upload portfolio image</span>
+                            <p style="margin-top: 10px; color: #888; font-size: 0.9rem;">
+                                Recommended: Square image, minimum 500x500 pixels
+                            </p>
+                        </label>
+                        <input type="file" id="id_portfolio_image" name="portfolio_image" accept="image/*">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personal Statement Section -->
+            <div class="form-section">
+                <h2>Personal Narrative</h2>
+                <div class="form-group">
+                    <label for="id_personal_statement">Personal Statement</label>
+                    <textarea id="id_personal_statement" name="personal_statement" 
+                              placeholder="Introduce yourself and your lifestyle philosophy...">{{ form.personal_statement.value|default:'' }}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_personal_philosophy">Personal Philosophy</label>
+                    <textarea id="id_personal_philosophy" name="personal_philosophy" 
+                              placeholder="Share your core values and approach to life...">{{ form.personal_philosophy.value|default:'' }}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_seeking_qualities">Qualities You Appreciate</label>
+                    <textarea id="id_seeking_qualities" name="seeking_qualities" 
+                              placeholder="Describe the qualities you value in connections...">{{ form.seeking_qualities.value|default:'' }}</textarea>
+                </div>
+            </div>
+            
+            <!-- Lifestyle Preferences -->
+            <div class="form-section">
+                <h2>Lifestyle Preferences</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="id_lifestyle_preference">Lifestyle Preference</label>
+                        <select id="id_lifestyle_preference" name="lifestyle_preference">
+                            <option value="">Select Preference</option>
+                            <option value="curated_connections" {% if form.lifestyle_preference.value == "curated_connections" %}selected{% endif %}>Curated Connections</option>
+                            <option value="luxury_experiences" {% if form.lifestyle_preference.value == "luxury_experiences" %}selected{% endif %}>Luxury Experiences</option>
+                            <option value="mutual_benefit" {% if form.lifestyle_preference.value == "mutual_benefit" %}selected{% endif %}>Mutual Benefit</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_current_engagement">Current Engagement Status</label>
+                        <select id="id_current_engagement" name="current_engagement">
+                            <option value="">Select Status</option>
+                            <option value="discreetly_available" {% if form.current_engagement.value == "discreetly_available" %}selected{% endif %}>Discreetly Available</option>
+                            <option value="selectively_engaged" {% if form.current_engagement.value == "selectively_engaged" %}selected{% endif %}>Selectively Engaged</option>
+                            <option value="unattached" {% if form.current_engagement.value == "unattached" %}selected{% endif %}>Unattached</option>
+                            <option value="complicated_elegance" {% if form.current_engagement.value == "complicated_elegance" %}selected{% endif %}>Complicated Elegance</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <a href="{% url 'lifestyle_dashboard' %}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Submit for Curator Review</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

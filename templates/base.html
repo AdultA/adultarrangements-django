@@ -1,0 +1,258 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Core SEO Meta Tags - DEFAULT VALUES -->
+    <title>{% block seo_title %}Elite Lifestyle Connections | Adult Arrangements{% endblock %}</title>
+    <meta name="description" content="{% block seo_description %}An exclusive community for accomplished individuals seeking meaningful connections and shared appreciation for life's finer moments.{% endblock %}">
+    <meta name="keywords" content="{% block seo_keywords %}elite dating, luxury companionship, sophisticated connections, premium social network, curated introductions{% endblock %}">
+    
+    <!-- Open Graph / Facebook - DEFAULT VALUES -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{% block og_url %}https://adultarrangements.com{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Elite Lifestyle Connections | Adult Arrangements{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}An exclusive community for accomplished individuals seeking meaningful connections.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop{% endblock %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter - DEFAULT VALUES -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{% block twitter_url %}https://adultarrangements.com{% endblock %}">
+    <meta name="twitter:title" content="{% block twitter_title %}Elite Lifestyle Connections | Adult Arrangements{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}An exclusive community for accomplished individuals seeking meaningful connections.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop{% endblock %}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    
+    <!-- Robots meta - DEFAULT: index, follow -->
+    <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+    
+    <!-- Additional Meta Blocks -->
+    {% block structured_data %}{% endblock %}
+    {% block extra_meta %}{% endblock %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* 2025 Palette */
+            --bg-deep: #050505;
+            --bg-panel: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-muted: #888888;
+            
+            /* Champagne Chrome Gradient */
+            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 100%);
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+            --blur: blur(20px);
+            
+            /* Accents */
+            --accent-glow: 0 0 20px rgba(191, 149, 63, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #111 0%, #000 100%);
+            min-height: 100vh;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(to bottom, #000000 0%, transparent 100%);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            background: transparent;
+            border: var(--glass-border);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-button.primary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+
+        /* --- MAIN CONTENT AREA --- */
+        main {
+            min-height: calc(100vh - 200px);
+            padding-top: 120px;
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 4rem;
+            border-top: 1px solid #111;
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        footer a:hover {
+            color: #999;
+        }
+
+        /* RESPONSIVE FIXES */
+        @media (max-width: 900px) {
+            nav { 
+                padding: 1rem 1.5rem;
+                min-height: 60px;
+            }
+            
+            /* FIX: Smaller logo on mobile */
+            .logo {
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+                max-width: 150px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .nav-actions {
+                gap: 0.5rem;
+            }
+            
+            .nav-button {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+                min-width: auto;
+            }
+
+            main {
+                padding-top: 80px;
+            }
+            
+            footer {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* EXTRA SMALL PHONES */
+        @media (max-width: 480px) {
+            nav { 
+                padding: 0.8rem 1rem;
+            }
+            
+            .logo {
+                font-size: 1rem;
+                max-width: 120px;
+            }
+            
+            .nav-button {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        {% block extra_css %}{% endblock %}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">ADULT ARRANGEMENTS</a>
+        <div class="nav-actions">
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="nav-button">My Portfolio</a>
+                <a href="{% url 'logout' %}" class="nav-button">Depart</a>
+            {% else %}
+                <!-- REMOVED "Our Philosophy" from header -->
+                <a href="{% url 'login' %}" class="nav-button primary">Member Access</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}
+        <!-- Each page will insert its content here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 ADULT ARRANGEMENTS. REDEFINING ELITE COMPANIONSHIP.<br>DISCRETION ASSURED.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.7rem;">
+            <a href="{% url 'about' %}">Our Philosophy</a> • <!-- MOVED TO FOOTER -->
+            <a href="{% url 'terms' %}">Terms of Membership</a> •
+            <a href="{% url 'privacy' %}">Privacy Charter</a> •
+            <a href="{% url 'safety' %}">Discretion & Safety</a>
+        </p>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

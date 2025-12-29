@@ -1,0 +1,228 @@
+<!-- templates/about.html -->
+{% extends "base.html" %}
+
+{% block seo_title %}Our Philosophy | Adult Arrangements{% endblock %}
+
+{% block seo_description %}Discover the philosophy behind Adult Arrangements - an exclusive community for accomplished individuals seeking meaningful connections and shared appreciation for life's finer moments.{% endblock %}
+
+{% block og_title %}Our Philosophy | Adult Arrangements{% endblock %}
+
+{% block og_description %}The philosophy guiding our exclusive community of accomplished individuals.{% endblock %}
+
+{% block content %}
+<div class="about-wrapper">
+    <div class="about-header">
+        <h1>Our Philosophy</h1>
+        <p class="subtitle">Redefining Modern Connections</p>
+    </div>
+    
+    <div class="about-content">
+        <div class="philosophy-card">
+            <div class="philosophy-icon">✨</div>
+            <h2>Beyond Ordinary</h2>
+            <p>We believe meaningful connections transcend conventional boundaries. Our platform brings together accomplished individuals who appreciate life's finer moments and seek companionship beyond the ordinary.</p>
+        </div>
+        
+        <div class="philosophy-card">
+            <div class="philosophy-icon">🎭</div>
+            <h2>Curated Experiences</h2>
+            <p>Like a private members' club or exclusive event, we curate introductions between individuals who share similar lifestyles, interests, and appreciation for quality experiences.</p>
+        </div>
+        
+        <div class="philosophy-card">
+            <div class="philosophy-icon">🔒</div>
+            <h2>Absolute Discretion</h2>
+            <p>Discretion is our cornerstone. We employ enterprise-grade security and strict confidentiality protocols to ensure our members' privacy is always protected.</p>
+        </div>
+        
+        <div class="mission-statement">
+            <h3>Our Mission</h3>
+            <p>To create an exclusive environment where accomplished individuals can form genuine connections based on shared interests, mutual respect, and appreciation for life's exceptional experiences.</p>
+            
+            <h3 style="margin-top: 2rem;">Community Standards</h3>
+            <ul>
+                <li><strong>Respect:</strong> Every member deserves dignity and consideration</li>
+                <li><strong>Authenticity:</strong> Genuine connections require honest representation</li>
+                <li><strong>Discretion:</strong> Privacy is paramount and mutually respected</li>
+                <li><strong>Quality:</strong> We prioritize meaningful interactions over quantity</li>
+            </ul>
+        </div>
+        
+        <div class="cta-section">
+            <h3>Ready to Join Our Community?</h3>
+            <a href="{% url 'register' %}" class="cta-button">Request Membership</a>
+            <p class="small-text">Membership is by application only</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-wrapper {
+        padding: 6rem 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .about-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .about-header h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+    }
+
+    .about-content {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+    
+    .philosophy-card {
+        background: var(--glass-bg);
+        backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        transition: transform 0.3s;
+    }
+    
+    .philosophy-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255,255,255,0.05);
+    }
+    
+    .philosophy-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .philosophy-card h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #bf953f;
+    }
+    
+    .philosophy-card p {
+        color: #ccc;
+        line-height: 1.6;
+        font-size: 1.1rem;
+    }
+    
+    .mission-statement {
+        background: var(--glass-bg);
+        backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        border-radius: 20px;
+        padding: 3rem;
+        margin-top: 1rem;
+    }
+    
+    .mission-statement h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #bf953f;
+    }
+    
+    .mission-statement p {
+        color: #ccc;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .mission-statement ul {
+        margin-left: 1.5rem;
+        color: #ccc;
+        line-height: 1.6;
+    }
+    
+    .mission-statement li {
+        margin-bottom: 0.8rem;
+        font-size: 1.1rem;
+    }
+    
+    .cta-section {
+        text-align: center;
+        padding: 3rem;
+        background: var(--glass-bg);
+        backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        border-radius: 20px;
+        margin-top: 2rem;
+    }
+    
+    .cta-section h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta-button {
+        display: inline-block;
+        padding: 1rem 3rem;
+        background: var(--gold-gradient);
+        color: #000;
+        font-weight: 600;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: 0.3s;
+        box-shadow: var(--accent-glow);
+        border: none;
+        cursor: pointer;
+        margin: 1rem 0;
+    }
+    
+    .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(191, 149, 63, 0.6);
+    }
+    
+    .small-text {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+        .about-wrapper {
+            padding: 4rem 1rem;
+        }
+        
+        .about-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .philosophy-card {
+            padding: 1.5rem;
+        }
+        
+        .mission-statement {
+            padding: 2rem;
+        }
+        
+        .cta-section {
+            padding: 2rem;
+        }
+        
+        .philosophy-card, .mission-statement, .cta-section {
+            margin: 1rem 0;
+        }
+    }
+</style>
+{% endblock %}
